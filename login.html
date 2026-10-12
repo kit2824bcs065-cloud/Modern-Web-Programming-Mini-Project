@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | VoltStore India - Modern E-Commerce</title>
+  <meta name="description" content="Sign in to your VoltStore account to browse products, track orders, and manage wishlist items.">
+  
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-page-body">
+
+  <div class="auth-container">
+    <div class="auth-card">
+      
+      <!-- Brand Logo Header -->
+      <div class="auth-header">
+        <a href="index.html" class="brand-logo" aria-label="Back to Store">
+          <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+          <span class="brand-text">Volt<span class="brand-accent">Store</span></span>
+        </a>
+        <h1 class="auth-title">Welcome Back</h1>
+        <p class="auth-subtitle">Log in to access your cart, wishlist, and exclusive member discounts.</p>
+      </div>
+
+      <!-- Demo Security Notice Box -->
+      <div class="auth-notice-box">
+        <div class="notice-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          <strong>Demo Authentication Notice</strong>
+        </div>
+        <p>This is a client-side prototype using browser <code>localStorage</code>. Never enter real passwords. In a production system, authentication requires a secure backend (e.g. Node.js/Python, bcrypt hashing, and HTTP-only JWT cookies).</p>
+      </div>
+
+      <!-- Quick Demo Account Fill Button -->
+      <div class="demo-quick-fill">
+        <span>Quick Test:</span>
+        <button type="button" class="btn btn-outline btn-xs" id="quickFillAarav">Fill "Aarav Sharma" (aarav@demo.in)</button>
+        <button type="button" class="btn btn-outline btn-xs" id="quickFillPriya">Fill "Priya Patel" (priya@demo.in)</button>
+      </div>
+
+      <!-- Error Alert Box -->
+      <div class="alert-box alert-error hidden" id="loginErrorAlert" role="alert"></div>
+
+      <!-- Login Form -->
+      <form id="loginForm" class="auth-form" novalidate>
+        
+        <!-- Email Field -->
+        <div class="form-group">
+          <label for="loginEmail" class="form-label">Email Address</label>
+          <div class="input-wrapper">
+            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <input 
+              type="email" 
+              id="loginEmail" 
+              class="form-input" 
+              placeholder="e.g. name@example.com" 
+              required
+              autocomplete="email"
+            >
+          </div>
+          <small class="field-error-msg hidden" id="emailError"></small>
+        </div>
+
+        <!-- Password Field -->
+        <div class="form-group">
+          <div class="label-row">
+            <label for="loginPassword" class="form-label">Password</label>
+            <a href="#" class="forgot-link" onclick="alert('In this demo mode, you can type any password with 6+ characters or click the Quick Test buttons above.'); return false;">Forgot Password?</a>
+          </div>
+          <div class="input-wrapper">
+            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <input 
+              type="password" 
+              id="loginPassword" 
+              class="form-input has-toggle-btn" 
+              placeholder="Enter at least 6 characters" 
+              required
+              autocomplete="current-password"
+            >
+            <button type="button" id="togglePasswordBtn" class="password-toggle-btn" aria-label="Show password">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+          <small class="field-error-msg hidden" id="passwordError"></small>
+        </div>
+
+        <!-- Remember Me Checkbox -->
+        <div class="form-group remember-row">
+          <label class="custom-checkbox-label">
+            <input type="checkbox" id="rememberMe">
+            <span class="custom-checkbox"></span>
+            <span>Remember my email</span>
+          </label>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary w-100 btn-submit" id="submitLoginBtn">
+          <span>Sign In to VoltStore</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+
+      </form>
+
+      <!-- Auth Footer Links -->
+      <div class="auth-footer">
+        <p>Don't have an account? <a href="signup.html" class="auth-link">Create a demo account</a></p>
+        <div class="auth-back-link">
+          <a href="index.html">← Back to Store Catalog</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="auth.js"></script>
+  <script>
+    // Theme sync for auth page
+    const savedTheme = localStorage.getItem("voltstore_theme") || "light";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+
+    // Setup password toggle
+    window.authModule.setupPasswordToggle("loginPassword", "togglePasswordBtn");
+
+    // Pre-fill remembered email
+    const remembered = localStorage.getItem("voltstore_remember_email");
+    if (remembered) {
+      document.getElementById("loginEmail").value = remembered;
+      document.getElementById("rememberMe").checked = true;
+    }
+
+    // Quick Fill Buttons
+    document.getElementById("quickFillAarav").addEventListener("click", () => {
+      document.getElementById("loginEmail").value = "aarav@demo.in";
+      document.getElementById("loginPassword").value = "demopassword123";
+      clearAlert();
+    });
+
+    document.getElementById("quickFillPriya").addEventListener("click", () => {
+      document.getElementById("loginEmail").value = "priya@demo.in";
+      document.getElementById("loginPassword").value = "demopassword123";
+      clearAlert();
+    });
+
+    // Form submission
+    const form = document.getElementById("loginForm");
+    const errorAlert = document.getElementById("loginErrorAlert");
+
+    function clearAlert() {
+      errorAlert.classList.add("hidden");
+      errorAlert.textContent = "";
+    }
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      clearAlert();
+
+      const email = document.getElementById("loginEmail").value;
+      const password = document.getElementById("loginPassword").value;
+      const remember = document.getElementById("rememberMe").checked;
+
+      const result = window.authModule.loginUser(email, password, remember);
+
+      if (!result.success) {
+        errorAlert.textContent = result.message;
+        errorAlert.classList.remove("hidden");
+      } else {
+        // Successful demo login -> redirect to home page
+        window.location.href = "index.html?loginSuccess=1";
+      }
+    });
+  </script>
+</body>
+</html>
